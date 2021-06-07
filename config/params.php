@@ -7,16 +7,16 @@ define('UPLOADS_PATH', BASE_PATH . '/web/uploads/');
 define('IMG_PATH', '/images/');
 
 //laxsjc
-define('WECHAT_APPID', "wxbc00952e2ce81999");
-define('WECHAT_APPSECRET', "d181da5c18102c0548da5290772ad4de");
-define('WECHAT_TOKEN', "y9G54vH03mzSAx4ZbPYI1AKjOI10zg5B");
-define('WECHAT_ENCODINGAESKEY', "li1wpoP0f9hwNncPJqyOgq5sszkN25Ogwf7GezZnmC9");
+//define('WECHAT_APPID', "wxbc00952e2ce81999");
+//define('WECHAT_APPSECRET', "d181da5c18102c0548da5290772ad4de");
+//define('WECHAT_TOKEN', "y9G54vH03mzSAx4ZbPYI1AKjOI10zg5B");
+//define('WECHAT_ENCODINGAESKEY', "li1wpoP0f9hwNncPJqyOgq5sszkN25Ogwf7GezZnmC9");
 
 //demo
-//define('WECHAT_APPID', "wxefd55d56a1d1c4ff");
-//define('WECHAT_APPSECRET', "1c8d80d826417f8db878efb0f57af488");
-//define('WECHAT_TOKEN', "wxDemo");
-//define('WECHAT_ENCODINGAESKEY', "");
+define('WECHAT_APPID', "wxefd55d56a1d1c4ff");
+define('WECHAT_APPSECRET', "1c8d80d826417f8db878efb0f57af488");
+define('WECHAT_TOKEN', "wxDemo");
+define('WECHAT_ENCODINGAESKEY', "");
 
 
 define('THREE_DAYS_TIME_STAMP', 259200);
