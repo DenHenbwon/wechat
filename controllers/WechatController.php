@@ -21,6 +21,17 @@ class WechatController extends Controller
     protected $token = WECHAT_TOKEN;
     protected $encoding_key = WECHAT_ENCODINGAESKEY;
 
+    protected $arr = [
+        [
+            'ask' => ['提现失败', '提现不了', 1],
+            'ans' => "您好\nA.提现失败 请您检查您绑定微信实名和所填写真实姓名及身份证号是否属于同一个人\nB.如果显示您的一笔提现正在进行 就是您的正在进行一笔提现操作 得等这笔提现完成才能进行新的提现"
+        ],
+        [
+            'ask' => ['完成不了', 2],
+            'ans' => "您好，任务类问题遇到打不开完成不了情况的您可以截图在钱庄app里申诉"
+        ],
+    ]
+
     public function beforeAction($action)
     {
         //记录日志到专用文件中
@@ -65,6 +76,7 @@ class WechatController extends Controller
             case Wechat::MSGTYPE_TEXT:
                 $msg = $weObj->getRevContent();
                 $ans = $this->getAnswer($msg);
+                /*
                 if (isset($ans['id'])) {
                     $daystat = DayStat::findOne(['openid' => $open_id, 'keyword' => $ans['id'], 'day' => strtotime(date("Ymd"))]);
                     $time = time();
@@ -105,6 +117,18 @@ class WechatController extends Controller
                         ];
                         $weObj->sendCustomMessage($data1);
                     }
+                }
+                */
+
+                if (!empty($ans['reply'])) {
+                    $data1 = [
+                        'touser' => $open_id,
+                        'msgtype' => 'text',
+                        'text' => [
+                            'content' => $ans['reply'],
+                        ],
+                    ];
+                    $weObj->sendCustomMessage($data1);
                 }
                 exit;
                 break;
@@ -226,6 +250,7 @@ class WechatController extends Controller
      */
     public function getAnswer($msg)
     {
+        /*
         $replyInfo = ReKwInfo::find()
             ->where(['like', 'keyword', $msg])
             ->orderBy('create_time DESC')
@@ -237,6 +262,16 @@ class WechatController extends Controller
 
         $data['source'] = '';
         $data['reply'] = '暂时未收录此关键词';
+        return $data;
+        */
+        
+        $data['source'] = '';
+        $data['reply'] = '暂时未收录此关键词';
+        foreach ($this->arr as $v) {
+            if (in_array($msg, $v['ask'])) {
+                $data['reply'] = $v['ans'];
+            }
+        }
         return $data;
     }
 
